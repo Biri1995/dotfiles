@@ -1,2 +1,9 @@
 # dotfiles
-Dotfiles for customization on Unix systems.
+Customization files.
+
+Configs for:
+-i3
+-kitty
+-oh-my-zsh
+-skhd
+-yabai

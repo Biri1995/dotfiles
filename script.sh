@@ -20,7 +20,8 @@ sudo apt install i3 feh firefox-esr dmenu xorg neovim sudo kitty neofetch ranger
 read -p "Setup i3 window manager? (y/n) " yn
 	case $yn in
 		y ) echo proceeding...;
-			sudo apt install neofetch;;
+			mkdir $HOME/.config/i3;
+			cp config/i3/config $HOME/.config/i3;;
 		n ) echo skipping...;;
 		* ) echo invalid input;
 			exit 1;;
@@ -34,7 +35,7 @@ read -p "Setup kitty console? (y/n) " yn
 		y ) echo proceeding...;
 			git clone https://github.com/Biri1995/dotfiles;
 			mkdir ~/.config/kitty/;
-			mv dotfiles/config/kitty/kitty.conf ~/.config/kitty/;;
+			cp config/kitty/kitty.conf $HOME/.config/kitty/;;
 		n ) echo skipping...;;
 		* ) echo invalid input;
 			exit 1;;

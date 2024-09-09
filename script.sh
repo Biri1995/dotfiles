@@ -14,7 +14,7 @@ read -p "Start setup? (y/n) " yn
 
 sudo apt update
 
-sudo apt install i3 feh firefox-esr dmenu xorg neovim sudo kitty neofetch ranger git lxappearance picom polybar -y
+sudo apt install i3 feh firefox-esr dmenu xorg neovim sudo kitty neofetch ranger git xfce4-panel xfce4-settings -y
 
 #i3 window manager setup
 read -p "Setup i3 window manager? (y/n) " yn

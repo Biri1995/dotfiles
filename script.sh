@@ -77,10 +77,10 @@ sudo apt install i3 feh firefox-esr dmenu xorg neovim sudo kitty neofetch ranger
 echo "Installing fonts..."
 sleep 2
 
-#wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip;
-#wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/BigBlueTerminal.zip;
-#sudo unzip BigBlueTerminal.zip -d /usr/local/share/fonts;
-#sudo unzip 0xProto.zip -d /usr/local/share/fonts;
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip;
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/BigBlueTerminal.zip;
+sudo unzip BigBlueTerminal.zip -d /usr/local/share/fonts;
+sudo unzip 0xProto.zip -d /usr/local/share/fonts;
 
 #i3 window manager setup
 echo "Setting up i3 window manager..."

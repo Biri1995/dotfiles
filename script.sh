@@ -58,14 +58,17 @@ read -p "Setup i3 window manager? (y/n) " yn
 	esac
 
 #startup script
-read -p "Do you wish to add i3 start script to profile? (start on login)"
+read -p "Do you wish to add i3 start script to profile? (start on login) (y/n) " yn
 	case $yn in
 		y ) echo proceeding...;
 
-			echo -e "#!/bin/bash\nstartx /usr/bin/i3" > /etc/profile.d/windowmanager.sh;
-			chmod +x /etc/profile.d/windowmanager.sh;;
+		sudo mv config/i3/i3onstartup.sh /etc/profile.d/;
+		sudo chmod +x /etc/profile.d/i3onstartup.sh;;
 
-
+		n ) echo skipping...;;
+		* ) echo invalid input;
+			exit 1;;
+	esac
 
 
 #kitty console setup
@@ -86,8 +89,10 @@ read -p "Setup ohmyzsh? (y/n) " yn
 		y ) echo proceeding...;
 			sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)";
 			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k;
+			git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
+			git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
 			rm ~/.zshrc;
-			cp oh-my-zsh/zshrc $HOME/.zshrc;
+			cp config/oh-my-zsh/zshrc $HOME/.zshrc;
 			echo Restart terminal to finish setup.;;
 		n ) echo skipping...;;
 		* ) echo invalid input;

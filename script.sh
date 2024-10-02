@@ -39,16 +39,22 @@ echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀�
 
 "
 
-#install packages
-read -p "Start setup? (y/n) " yn
-	case $yn in
-		y ) echo Proceeding...;
-			sleep 2;;
-		n ) echo Exiting...;
-			exit;;
-		* ) echo Invalid input, exiting...;
-			exit 1;;
-	esac
+#start script
+while true; do
+    read -p 'Start setup? (y/n): ' input
+    case $input in
+        [yY]*)
+            echo 'Proceeding...'
+            break
+            ;;
+        [nN]*)
+            echo 'Exiting...'
+            exit 1
+            ;;
+         *)
+            echo 'Invalid input...' >&2
+    esac
+done
 
 #vscodium repo 
 echo "Adding Codium Repository..."
@@ -71,10 +77,10 @@ sudo apt install i3 feh firefox-esr dmenu xorg neovim sudo kitty neofetch ranger
 echo "Installing fonts..."
 sleep 2
 
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip;
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/BigBlueTerminal.zip;
-sudo unzip BigBlueTerminal.zip -d /usr/local/share/fonts;
-sudo unzip 0xProto.zip -d /usr/local/share/fonts;
+#wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip;
+#wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/BigBlueTerminal.zip;
+#sudo unzip BigBlueTerminal.zip -d /usr/local/share/fonts;
+#sudo unzip 0xProto.zip -d /usr/local/share/fonts;
 
 #i3 window manager setup
 echo "Setting up i3 window manager..."
@@ -87,26 +93,31 @@ cp config/picom/picom.conf $HOME/.config/picom;
 mkdir $HOME/.config/polybar/polybar.conf;
 cp config/polybar/config.ini config/polybar/launch.sh $HOME/.config/polybar;
 
-#startup script
-read -p "Add i3 start on login script to profile.d? (y/n) " yn
-	case $yn in
-		y ) echo Proceeding...;
-			sleep 2;
-
+#i3 start on login script
+while true; do
+    read -p 'Add i3 start on login script? (y/n): ' input
+    case $input in
+        [yY]*)
+            echo 'Proceeding...';
+            sleep 2;
 			sudo cp config/i3/i3onstartup.sh /etc/profile.d/;
-			sudo chmod +x /etc/profile.d/i3onstartup.sh;;
+			sudo chmod +x /etc/profile.d/i3onstartup.sh;
+			break;;
+        [nN]*)
+            echo 'Skipping...';
+            break;;
+         *)
+            echo 'Invalid input...' >&2
+    esac
+done
 
-		n ) echo Skipping...;;
-		* ) echo invalid input;
-			exit 1;;
-	esac
-
-
-#kitty console setup
-read -p "Setup custom Kitty console? (y/n) " yn
-	case $yn in
-		y ) echo Proceeding...;
-			sleep 2;
+#custom kitty console
+while true; do
+    read -p 'Setup custom Kitty console? (y/n): ' input
+    case $input in
+        [yY]*)
+            echo 'Proceeding...';
+            sleep 2;
 			mkdir ~/.config/kitty/;
 			cp config/kitty/kitty.conf $HOME/.config/kitty/;
 
@@ -118,10 +129,17 @@ read -p "Setup custom Kitty console? (y/n) " yn
 			rm ~/.zshrc;
 			cp config/oh-my-zsh/zshrc $HOME/.zshrc;
 
-			echo Restart terminal to finish setup.;;
-		n ) echo Setup finished.;;
-	esac
+			echo Restart terminal to finish setup.;
+			break;;
+        [nN]*)
+            echo 'Exiting...'
+            exit 1
+            ;;
+         *)
+            echo 'Invalid input...' >&2
+    esac
+done
 
 echo "Setup finished, thanks for installing!"
 
-exit 1;;
+exit 1;

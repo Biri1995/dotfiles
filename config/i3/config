@@ -27,6 +27,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh &
 exec_always --no-startup-id picom -b
+client.focused #999999 #999999 #999999 #999999 #999999
 
 #Custom i3 commands
 default_border pixel 3
@@ -61,7 +62,7 @@ tiling_drag modifier titlebar
 bindsym $mod+Return exec kitty
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run

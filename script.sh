@@ -57,6 +57,15 @@ read -p "Setup i3 window manager? (y/n) " yn
 			exit 1;;
 	esac
 
+#startup script
+read -p "Do you wish to add i3 start script to profile? (start on login)"
+	case $yn in
+		y ) echo proceeding...;
+
+			echo -e "#!/bin/bash\nstartx /usr/bin/i3" > /etc/profile.d/windowmanager.sh;
+			chmod +x /etc/profile.d/windowmanager.sh;;
+
+
 
 
 #kitty console setup

@@ -45,12 +45,10 @@ while true; do
     case $input in
         [yY]*)
             echo 'Proceeding...'
-            break
-            ;;
+            break;;
         [nN]*)
             echo 'Exiting...'
-            exit 1
-            ;;
+            exit 1;;
          *)
             echo 'Invalid input...' >&2
     esac
@@ -71,40 +69,40 @@ echo "Updating and upgrading packages..."
 sleep 2
 
 sudo apt update
-sudo apt install i3 feh firefox-esr dmenu xorg neovim sudo kitty neofetch ranger git picom codium lxappearance gtk-chtheme -y
+sudo apt install i3 feh firefox-esr dmenu polybar xorg neovim sudo kitty neofetch ranger git picom codium lxappearance gtk-chtheme -y
 
 #install fonts
 echo "Installing fonts..."
 sleep 2
 
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip;
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/BigBlueTerminal.zip;
-sudo unzip BigBlueTerminal.zip -d /usr/local/share/fonts;
-sudo unzip 0xProto.zip -d /usr/local/share/fonts;
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/BigBlueTerminal.zip
+sudo unzip BigBlueTerminal.zip -d /usr/local/share/fonts
+sudo unzip 0xProto.zip -d /usr/local/share/fonts
 
 #i3 window manager setup
 echo "Setting up i3 window manager..."
 sleep 2
 
-mkdir $HOME/.config/i3;
-cp config/i3/config $HOME/.config/i3;
-mkdir $HOME/.config/picom;
-cp config/picom/picom.conf $HOME/.config/picom;
-mkdir $HOME/.config/polybar/polybar.conf;
-cp config/polybar/config.ini config/polybar/launch.sh $HOME/.config/polybar;
+mkdir $HOME/.config/i3
+cp config/i3/config $HOME/.config/i3
+mkdir $HOME/.config/picom
+cp config/picom/picom.conf $HOME/.config/picom
+mkdir $HOME/.config/polybar/
+cp config/polybar/config.ini config/polybar/launch.sh $HOME/.config/polybar
 
 #i3 start on login script
 while true; do
     read -p 'Add i3 start on login script? (y/n): ' input
     case $input in
         [yY]*)
-            echo 'Proceeding...';
-            sleep 2;
-			sudo cp config/i3/i3onstartup.sh /etc/profile.d/;
-			sudo chmod +x /etc/profile.d/i3onstartup.sh;
+            echo 'Proceeding...'
+            sleep 2
+			sudo cp config/i3/i3onstartup.sh /etc/profile.d/
+			sudo chmod +x /etc/profile.d/i3onstartup.sh
 			break;;
         [nN]*)
-            echo 'Skipping...';
+            echo 'Skipping...'
             break;;
          *)
             echo 'Invalid input...' >&2
@@ -116,25 +114,24 @@ while true; do
     read -p 'Setup custom Kitty console? (y/n): ' input
     case $input in
         [yY]*)
-            echo 'Proceeding...';
-            sleep 2;
-			mkdir ~/.config/kitty/;
-			cp config/kitty/kitty.conf $HOME/.config/kitty/;
+            echo 'Proceeding...'
+            sleep 2
+			mkdir ~/.config/kitty/
+			cp config/kitty/kitty.conf $HOME/.config/kitty/
 
 			#oh-my-zsh setup
-			sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)";
-			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k;
-			git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
-			git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
+			sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+			git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+			git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 			rm ~/.zshrc;
-			cp config/oh-my-zsh/zshrc $HOME/.zshrc;
+			cp config/oh-my-zsh/zshrc $HOME/.zshrc
 
-			echo Restart terminal to finish setup.;
+			echo Restart terminal to apply oh-my-zsh configuration.
 			break;;
         [nN]*)
             echo 'Exiting...'
-            exit 1
-            ;;
+            exit 1;;
          *)
             echo 'Invalid input...' >&2
     esac
